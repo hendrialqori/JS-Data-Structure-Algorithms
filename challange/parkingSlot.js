@@ -1,11 +1,20 @@
-class ParkingLot {
+"use strict";
+
+
+class ParkingSLot {
     constructor(sizeSlot) {
-        this.sizeLength = sizeSlot - 1;
         this.parkingSlot = Array(sizeSlot).fill('empty')
+        this.currentSlotNumber = 0;
     };
-    currentSlotNumber = 0;
+
+    asserts(conditional, message) {
+      if(!conditional) throw new Error(message)
+    }
+    
 
     park(cardId){
+      this.asserts(typeof cardId === 'string', "This params must be type string")
+      
         if(this.parkingSlot.length - 1 === this.currentSlotNumber) {
             this.parkingSlot[this.currentSlotNumber] = cardId
             this.currentSlotNumber ++;
@@ -44,13 +53,13 @@ class ParkingLot {
     }
 }
 
-const Parking = new ParkingLot(10)
-Parking.park('CARD-10')
+const Parking = new ParkingSLot(10)
+Parking.park("CARD-10")
 Parking.park('CARD-20')
 Parking.park('CARD-30')
 Parking.park('CARD-40')
 Parking.park('CARD-50')
 console.log('--------')
-Parking.remove('CARD-30')
+Parking.remove('CARD-00')
 console.log('--------')
 Parking.getSlots()
